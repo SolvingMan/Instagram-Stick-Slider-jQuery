@@ -155,9 +155,10 @@
     transform: scale(.2);
 }
 .lSSlideOuter .lSPager.lSGallery li.active, li.focus .dot_sliders{
-    color:rgb(0, 84, 255) !important;
-    opacity: 0.8;
+    color:#0e0e0e !important;
+    /* opacity: 0.8; */
     transform: scale(1);
+    font-weight: 900;
 }
 /* ############################################ */
 

@@ -343,7 +343,7 @@
             pager: function () {
                 var $this = this;
                 refresh.createPager = function () {
-                    elSize=86;
+                    elSize=110;
                     thumbWidth = (elSize - ((settings.thumbItem * (settings.thumbMargin)) - settings.thumbMargin)) / settings.thumbItem;
                     // console.log("343:"+thumbWidth);
                     // console.log("343:"+elSize);
@@ -429,7 +429,7 @@
                     if (settings.gallery) {
                         cl = 'lSGallery';
                     }
-                    $slide.after('<div style="width:91px; margin-left:'+(elSize*2/5)+'px ; overflow:hidden /*background-color:red*/"><ul class="lSPager ' + cl + '"></ul></div>');
+                    $slide.after('<div style="width:110px; margin-left:'+(elSize*2/5)+'px ; overflow:hidden /*background-color:red*/"><ul class="lSPager ' + cl + '"></ul></div>');
                     // console.log("418_elsize"+ ":" + elSize);
                     var gMargin = (settings.vertical) ? 'margin-left' : 'margin-top';
                     $slide.parent().find('.lSPager').css(gMargin, settings.galleryMargin + 'px');
@@ -552,6 +552,7 @@
                     ob.eq(i).removeClass("dot_small_2");
                     ob.eq(i).removeClass("dot_small_3");
                     ob.eq(i).removeClass("active");
+                    ob.eq(i).removeClass("focus");
                     ob.eq(i).removeClass("inactive");
                     }
 
@@ -561,6 +562,7 @@
                     // ob.eq(sc-1).removeClass('focus');
                     // ob.eq(sc+1).removeClass('focus');
                     ob.eq(sc).addClass('active');
+                    ob.eq(sc).addClass('focus');
                     ob.eq(sc+1).addClass('dot_medium');
                     ob.eq(sc-1).addClass('dot_medium');
                     ob.eq(sc+2).addClass('dot_small_1');
@@ -572,6 +574,8 @@
                     ob.eq(sc+5).removeClass('dot_small_2');
                     ob.eq(sc-5).addClass('inactive');
                     ob.eq(sc+5).addClass('inactive');
+                    ob.eq(sc+6).addClass('inactive');
+                    ob.eq(sc-6).addClass('inactive');
                 } else {
                     ob.removeClass('active');
                     // ob.removeClass('active_color');

@@ -562,7 +562,7 @@
                     // ob.eq(sc-1).removeClass('focus');
                     // ob.eq(sc+1).removeClass('focus');
                     ob.eq(sc).addClass('active');
-                    ob.eq(sc).addClass('focus');
+                   
                     ob.eq(sc+1).addClass('dot_medium');
                     ob.eq(sc-1).addClass('dot_medium');
                     ob.eq(sc+2).addClass('dot_small_1');
@@ -596,8 +596,8 @@
                         });
                     } else {
                         ob.css({
-                            'transform': 'translate3d(' + (4-v) + 'px, 0px, 0px)',
-                            '-webkit-transform': 'translate3d(' + (4-v) + 'px, 0px, 0px)',
+                            'transform': 'translate3d(' + (-v) + 'px, 0px, 0px)',
+                            '-webkit-transform': 'translate3d(' + (-v) + 'px, 0px, 0px)',
                         });
                     }
                 } else {

@@ -551,7 +551,6 @@
                     ob.eq(i).removeClass("dot_small_1");
                     ob.eq(i).removeClass("dot_small_2");
                     ob.eq(i).removeClass("dot_small_3");
-                    ob.eq(i).removeClass("focus");
                     ob.eq(i).removeClass("active");
                     ob.eq(i).removeClass("inactive");
                     }
@@ -562,7 +561,6 @@
                     // ob.eq(sc-1).removeClass('focus');
                     // ob.eq(sc+1).removeClass('focus');
                     ob.eq(sc).addClass('active');
-                   
                     ob.eq(sc+1).addClass('dot_medium');
                     ob.eq(sc-1).addClass('dot_medium');
                     ob.eq(sc+2).addClass('dot_small_1');
@@ -571,6 +569,7 @@
                     ob.eq(sc+3).addClass('dot_small_2');
                     ob.eq(sc-4).addClass('dot_small_3');
                     ob.eq(sc+4).addClass('dot_small_3');
+                    ob.eq(sc+5).removeClass('dot_small_2');
                     ob.eq(sc-5).addClass('inactive');
                     ob.eq(sc+5).addClass('inactive');
                 } else {

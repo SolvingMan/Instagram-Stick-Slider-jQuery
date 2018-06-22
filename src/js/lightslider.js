@@ -85,6 +85,8 @@
             interval = null,
             isTouch = ('ontouchstart' in document.documentElement);
         var refresh = {};
+        // console.log("88_$childern:"+JSON.stringify($children));
+        // console.log("88_elsize:" + elSize);
 
         refresh.chbreakpoint = function () {
             windowW = $(window).width();
@@ -103,6 +105,7 @@
                 }
                 if (typeof resposiveObj !== 'undefined' && resposiveObj !== null) {
                     for (var j in resposiveObj.settings) {
+                        // console.log("107_reponsiveObj:"+JSON.stringify(j));
                         if (resposiveObj.settings.hasOwnProperty(j)) {
                             if (typeof settingsTemp[j] === 'undefined' || settingsTemp[j] === null) {
                                 settingsTemp[j] = settings[j];
@@ -127,7 +130,7 @@
                 }
             }
         };
-
+        // console.log(elSize);
         refresh.calSW = function () {
             if (settings.autoWidth === false) {
                 slideWidth = (elSize - ((settings.item * (settings.slideMargin)) - settings.slideMargin)) / settings.item;
@@ -331,14 +334,20 @@
                 }
                 if (settings.loop === true && settings.mode === 'slide') {
                     $children.eq(scene).addClass('active');
+                    // console.log("335_scene:"+JSON.stringify($children));
                 } else {
                     $children.first().addClass('active');
+                    // console.log("337_scene:"+JSON.stringify($children));
                 }
             },
             pager: function () {
                 var $this = this;
                 refresh.createPager = function () {
+                    elSize=86;
                     thumbWidth = (elSize - ((settings.thumbItem * (settings.thumbMargin)) - settings.thumbMargin)) / settings.thumbItem;
+                    // console.log("343:"+thumbWidth);
+                    // console.log("343:"+elSize);
+
                     var $children = $slide.find('.lslide');
                     var length = $slide.find('.lslide').length;
                     var i = 0,
@@ -354,8 +363,11 @@
                             }
                         }
                         var thumb = $children.eq(i * settings.slideMove).attr('data-thumb');
+
                         if (settings.gallery === true) {
-                            pagers += '<li style="width:100%;' + property + ':' + thumbWidth + 'px;' + gutter + ':' + settings.thumbMargin + 'px"><a href="#"><img src="' + thumb + '" /></a></li>';
+                            pagers += '<li style="width:100%;' + property + ':' + thumbWidth + 'px;' + gutter + ':' + settings.thumbMargin + 'px"><i class=" fas fa-circle dot_sliders" style="font-size:10px;color:#e6e6e6"></i></li>';
+                            // console.log("364_gutter"+ ":"+ gutter);
+                            // console.log("property"+property+":"+thumbWidth);
                         } else {
                             pagers += '<li><a href="#">' + (i + 1) + '</a></li>';
                         }
@@ -396,12 +408,15 @@
                     }
                     var $pager = $cSouter.find('.lSPager').find('li');
                     $pager.first().addClass('active');
+                    // console.log("408_page.first:"+$pager.first().addClass('active'));
                     $pager.on('click', function () {
                         if (settings.loop === true && settings.mode === 'slide') {
                             scene = scene + ($pager.index(this) - $cSouter.find('.lSPager').find('li.active').index());
+                            console.log("409_scene"+":"+$pager.index(this));
                         } else {
                             scene = $pager.index(this);
                         }
+                        console.log("418_scene"+scene);
                         $el.mode(false);
                         if (settings.gallery === true) {
                             $this.slideThumb();
@@ -414,7 +429,8 @@
                     if (settings.gallery) {
                         cl = 'lSGallery';
                     }
-                    $slide.after('<ul class="lSPager ' + cl + '"></ul>');
+                    $slide.after('<div style="width:91px; margin-left:'+(elSize*2/5)+'px ; overflow:hidden /*background-color:red*/"><ul class="lSPager ' + cl + '"></ul></div>');
+                    // console.log("418_elsize"+ ":" + elSize);
                     var gMargin = (settings.vertical) ? 'margin-left' : 'margin-top';
                     $slide.parent().find('.lSPager').css(gMargin, settings.galleryMargin + 'px');
                     refresh.createPager();
@@ -472,7 +488,9 @@
                 if (this.doCss() && settings.mode === 'fade') {
                     $slide.addClass('on');
                 }
+                // console.log("487_object_active:"+JSON.stringify(ob));
                 var sc = 0;
+                console.log("492_slideMove:"+settings.slideMove);
                 if (scene * settings.slideMove < length) {
                     ob.removeClass('active');
                     if (!this.doCss() && settings.mode === 'fade' && t === false) {
@@ -513,15 +531,58 @@
                     if (!this.doCss() && settings.mode === 'fade' && t === false) {
                         ob.eq(sc).fadeIn(settings.speed);
                     }
+                    console.log(sc);
+                    for (var i=0 ;i <= (ob.length-1); i++)
+                    {
+                    //     if (i == sc) {
+                    //         // ob.eq(i).removeClass("inactive");
+                    //         ob.eq(i).removeClass("dot_medium");
+                    //         ob.eq(i).removeClass("dot_small");
+                    //         ob.eq(sc).addClass('active');
+                    //         ob.eq(sc).addClass('focus');
+                    //     }
+                    //    if (i == (sc +1) ) {
+                    //     ob.eq(sc).addClass('active');
+                    //     ob.eq(sc).addClass('focus');
+
+                    //     }
+
+                    ob.eq(i).removeClass("dot_medium");
+                    ob.eq(i).removeClass("dot_small_1");
+                    ob.eq(i).removeClass("dot_small_2");
+                    ob.eq(i).removeClass("dot_small_3");
+                    ob.eq(i).removeClass("focus");
+                    ob.eq(i).removeClass("active");
+                    ob.eq(i).removeClass("inactive");
+                    }
+
+                    console.log(ob.length);
+                    // ob.eq(sc+4).removeClass("inactive");
+                    // ob.eq(sc-4).removeClass("inactive");
+                    // ob.eq(sc-1).removeClass('focus');
+                    // ob.eq(sc+1).removeClass('focus');
                     ob.eq(sc).addClass('active');
+                    ob.eq(sc).addClass('focus');
+                    ob.eq(sc+1).addClass('dot_medium');
+                    ob.eq(sc-1).addClass('dot_medium');
+                    ob.eq(sc+2).addClass('dot_small_1');
+                    ob.eq(sc-2).addClass('dot_small_1');
+                    ob.eq(sc-3).addClass('dot_small_2');
+                    ob.eq(sc+3).addClass('dot_small_2');
+                    ob.eq(sc-4).addClass('dot_small_3');
+                    ob.eq(sc+4).addClass('dot_small_3');
+                    ob.eq(sc-5).addClass('inactive');
+                    ob.eq(sc+5).addClass('inactive');
                 } else {
                     ob.removeClass('active');
+                    // ob.removeClass('active_color');
                     ob.eq(ob.length - 1).addClass('active');
                     if (!this.doCss() && settings.mode === 'fade' && t === false) {
                         ob.fadeOut(settings.speed);
                         ob.eq(sc).fadeIn(settings.speed);
                     }
                 }
+                // console.log("537_active");
             },
             move: function (ob, v) {
                 if (settings.rtl === true) {
@@ -535,8 +596,8 @@
                         });
                     } else {
                         ob.css({
-                            'transform': 'translate3d(' + (-v) + 'px, 0px, 0px)',
-                            '-webkit-transform': 'translate3d(' + (-v) + 'px, 0px, 0px)',
+                            'transform': 'translate3d(' + (4-v) + 'px, 0px, 0px)',
+                            '-webkit-transform': 'translate3d(' + (4-v) + 'px, 0px, 0px)',
                         });
                     }
                 } else {
@@ -546,17 +607,19 @@
                         }, settings.speed, settings.easing);
                     } else {
                         ob.css('position', 'relative').animate({
-                            left: -v + 'px'
+                            left: (4-v) + 'px'
                         }, settings.speed, settings.easing);
                     }
                 }
                 var $thumb = $slide.parent().find('.lSPager').find('li');
+                // console.log("568_$thumb:"+JSON.stringify($thumb));
                 this.active($thumb, true);
             },
             fade: function () {
                 this.active($children, false);
                 var $thumb = $slide.parent().find('.lSPager').find('li');
                 this.active($thumb, true);
+                // console.log("573_$thumb:"+$thumb);
             },
             slide: function () {
                 var $this = this;
@@ -611,6 +674,8 @@
             },
             slideThumb: function () {
                 var position;
+                // console.log("633_currentPagerPosition:"+settings.currentPagerPosition);
+                console.log("634_page"+scene);
                 switch (settings.currentPagerPosition) {
                 case 'left':
                     position = 0;
@@ -638,6 +703,11 @@
                     thumbSlide = 0;
                 }
                 this.move($pager, thumbSlide);
+                for (var i=0;i <= 14; i++){
+                   
+
+
+                }
             },
             auto: function () {
                 if (settings.auto) {

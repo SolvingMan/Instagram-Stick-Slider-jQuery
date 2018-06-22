@@ -365,7 +365,7 @@
                         var thumb = $children.eq(i * settings.slideMove).attr('data-thumb');
 
                         if (settings.gallery === true) {
-                            pagers += '<li style="width:100%;' + property + ':' + thumbWidth + 'px;' + gutter + ':' + settings.thumbMargin + 'px"><i class=" fas fa-circle dot_sliders" style="font-size:10px;color:#e6e6e6"></i></li>';
+                            pagers += '<li style="width:100%;' + property + ':' + thumbWidth + 'px;' + gutter + ':' + settings.thumbMargin + 'px"><i class=" fas fa-circle dot_sliders" style="font-size:10px;font-weight:400; color:#0e0e0e"></i></li>';
                             // console.log("364_gutter"+ ":"+ gutter);
                             // console.log("property"+property+":"+thumbWidth);
                         } else {

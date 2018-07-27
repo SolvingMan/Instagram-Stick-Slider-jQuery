@@ -343,10 +343,22 @@
             },
             pager: function () {
                 var $this = this;
-                console.log("refresh start");
                 refresh.createPager = function () {
-                    console.log("347:"+elSize);
-                    elSize=130;
+                    // elSize= elSize*3/7;
+                    console.log("347_windowscren:"+window.screen.availWidth); 
+                    if ( window.screen.availWidth >= 1900) {
+                        elSize= elSize/4;
+                        console.log("1900:"+elSize);
+                    }
+                    else if (window.screen.availWidth < 1900 && window.screen.availWidth >= 1024 ) {
+                        elSize =elSize*5/17;
+                        console.log("1024:"+elSize);
+                    }
+                    else {
+                        elSize = elSize*5/17;
+                        console.log("else:"+ elSize);
+                    };
+                    // console.log("347:"+elSize);
                     thumbWidth = (elSize - ((settings.thumbItem * (settings.thumbMargin)) - settings.thumbMargin)) / settings.thumbItem;
                     console.log("349:"+thumbWidth);
                     // console.log("343:"+elSize);
@@ -436,17 +448,34 @@
                     var dot_sldier_width;
                     var percent_margin;
                     var percent_width;
-                    dot_sldier_margin = (elSize-130)/2;
-                    percent_margin = (130*dot_sldier_margin)/elSize;
-                    percent_width = (130*100)/elSize;
+                    // console.log("elSize"+(elSize*2)/5);
+                    if ( window.screen.availWidth >= 1900) {
+                         dot_sldier_width = elSize/4;
+                         dot_sldier_margin = elSize*3/8;
+                         percent_width = 25;
+                         percent_margin = 37.5;
+                        console.log("1900_451:"+elSize);
+                    }
+                    else if (window.screen.availWidth < 1900 && window.screen.availWidth >= 1024 ) {
+                        dot_sldier_width = elSize*5/17;
+                        dot_sldier_margin = elSize*6/17;
+                         percent_margin = 35.2;
+                         percent_width = 29.4;
+                        console.log("1024_454:"+elSize);
+                    }
+                    else {
+                        dot_sldier_width = elSize*5/17;
+                        dot_sldier_margin = elSize*6/17;
+                        percent_margin = 35.2;
+                        percent_width = 29.4;
+                        console.log("else_460:"+elSize);
+                    };
                     console.log("div:"+elSize);
-                    // $slide.after('<div style="width:'+(170)+'px; margin-left:'+(percent_margin)+'%; overflow:hidden"><ul class="lSPager ' + cl + '"></ul></div>');
-                    $slide.after('<div class="pager_new" style="width:'+(130)+'px; overflow:hidden"><ul class="lSPager ' + cl + '"></ul></div>');
-                    // console.log("418_elsize"+ ":" + elSize);
+                    $slide.after('<div style="width:'+(percent_width)+'%; margin-left:'+(percent_margin)+'%; overflow:hidden"><ul class="lSPager ' + cl + '"></ul></div>');
+                    console.log("418_elsize"+ ":" + elSize);
                     var gMargin = (settings.vertical) ? 'margin-left' : 'margin-top';
                     $slide.parent().find('.lSPager').css(gMargin, settings.galleryMargin + 'px');
                     refresh.createPager();
-                    console.log('refresh createPage')
                 }
 
                 setTimeout(function () {

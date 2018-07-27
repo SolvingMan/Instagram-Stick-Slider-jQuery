@@ -157,8 +157,8 @@
 .lSSlideOuter .lSPager.lSGallery li.active, li.focus .dot_sliders{
     color:#0e0e0e !important;
     /* opacity: 0.8; */
-    transform: scale(1);
-    font-weight: 900 !important;
+    transform: scale(.9);
+    /* font-weight: 900 !important; */
 }
 /* ############################################ */
 
@@ -419,4 +419,7 @@
   cursor: -o-grabbing;
   cursor: -ms-grabbing;
   cursor: grabbing;
+}
+.pager_new {
+    margin: auto;
 }

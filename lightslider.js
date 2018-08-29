@@ -338,15 +338,12 @@
                     console.log("347_windowscren:"+window.screen.availWidth); 
                     if ( window.screen.availWidth >= 1900) {
                         elSize= elSize/4;
-                        console.log("1900:"+elSize);
                     }
                     else if (window.screen.availWidth < 1900 && window.screen.availWidth >= 1024 ) {
                         elSize =elSize*5/17;
-                        console.log("1024:"+elSize);
                     }
                     else {
                         elSize = elSize*5/17;
-                        console.log("else:"+ elSize);
                     };
                     // console.log("347:"+elSize);
                     thumbWidth = (elSize - ((settings.thumbItem * (settings.thumbMargin)) - settings.thumbMargin)) / settings.thumbItem;
@@ -440,10 +437,17 @@
                     var percent_width;
                     // console.log("elSize"+(elSize*2)/5);
                     if ( window.screen.availWidth >= 1900) {
-                        
+                         dot_sldier_width = elSize/4;
+                         dot_sldier_margin = elSize*3/8;
+                         percent_width = 25;
+                         percent_margin = 37.5;
+                        console.log("1900_451:"+elSize);
                     }
                     else if (window.screen.availWidth < 1900 && window.screen.availWidth >= 1024 ) {
-                        
+                        dot_sldier_width = elSize*5/17;
+                        dot_sldier_margin = elSize*6/17;
+                         percent_margin = 35.2;
+                         percent_width = 29.4;
                         console.log("1024_454:"+elSize);
                     }
                     else {

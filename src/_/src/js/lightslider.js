@@ -260,7 +260,17 @@
                             var tItem = settings.autoWidth === true ? tI : settings.item;
 
                             /**/
-                          
+                            if (tItem < $el.find('.clone.left').length) {
+                                for (var i = 0; i < $el.find('.clone.left').length - tItem; i++) {
+                                    $children.eq(i).remove();
+                                }
+                            }
+                            if (tItem < $el.find('.clone.right').length) {
+                                for (var j = $children.length - 1; j > ($children.length - 1 - $el.find('.clone.right').length); j--) {
+                                    scene--;
+                                    $children.eq(j).remove();
+                                }
+                            }
                             /**/
                             for (var n = $el.find('.clone.right').length; n < tItem; n++) {
                                 $el.find('.lslide').eq(n).clone().removeClass('lslide').addClass('clone right').appendTo($el);
@@ -333,24 +343,12 @@
             },
             pager: function () {
                 var $this = this;
+                console.log("refresh start");
                 refresh.createPager = function () {
-                    // elSize= elSize*3/7;
-                    console.log("347_windowscren:"+window.screen.availWidth); 
-                    if ( window.screen.availWidth >= 1900) {
-                        elSize= elSize/4;
-                        console.log("1900:"+elSize);
-                    }
-                    else if (window.screen.availWidth < 1900 && window.screen.availWidth >= 1024 ) {
-                        elSize =elSize*5/17;
-                        console.log("1024:"+elSize);
-                    }
-                    else {
-                        elSize = elSize*5/17;
-                        console.log("else:"+ elSize);
-                    };
-                    // console.log("347:"+elSize);
+                    console.log("347:"+elSize);
+                    elSize=130;
                     thumbWidth = (elSize - ((settings.thumbItem * (settings.thumbMargin)) - settings.thumbMargin)) / settings.thumbItem;
-                    console.log("349:"+thumbWidth);
+                    console.log("349:"+settings.thumbItem);
                     // console.log("343:"+elSize);
 
                     var $children = $slide.find('.lslide');
@@ -358,6 +356,7 @@
                     var i = 0,
                         pagers = '',
                         v = 0;
+                        console.log(length+"length");
                     for (i = 0; i < length; i++) {
                         if (settings.mode === 'slide') {
                             // calculate scene * slide value
@@ -370,7 +369,7 @@
                         var thumb = $children.eq(i * settings.slideMove).attr('data-thumb');
 
                         if (settings.gallery === true) {
-                            pagers += '<li style="width:100%;' + property + ':' + thumbWidth + 'px;' + gutter + ':' + settings.thumbMargin + 'px"><i class=" fas fa-circle dot_sliders" style="font-size:'+thumbWidth+'px;color:#e6e6e6"></i></li>';
+                            pagers += '<li style="width:100%;' + property + ':' + thumbWidth + 'px;' + gutter + ':' + settings.thumbMargin + 'px"><i class=" fas fa-circle dot_sliders" style="font-size:'+(thumbWidth*0.9)+'px;color:#e6e6e6"></i></li>';
                             // console.log("364_gutter"+ ":"+ gutter);
                             console.log("property"+property+":"+thumbWidth);
                         } else {
@@ -438,34 +437,17 @@
                     var dot_sldier_width;
                     var percent_margin;
                     var percent_width;
-                    // console.log("elSize"+(elSize*2)/5);
-                    if ( window.screen.availWidth >= 1900) {
-                         dot_sldier_width = elSize/4;
-                         dot_sldier_margin = elSize*3/8;
-                         percent_width = 25;
-                         percent_margin = 37.5;
-                        console.log("1900_451:"+elSize);
-                    }
-                    else if (window.screen.availWidth < 1900 && window.screen.availWidth >= 1024 ) {
-                        dot_sldier_width = elSize*5/17;
-                        dot_sldier_margin = elSize*6/17;
-                         percent_margin = 35.2;
-                         percent_width = 29.4;
-                        console.log("1024_454:"+elSize);
-                    }
-                    else {
-                        dot_sldier_width = elSize*5/17;
-                        dot_sldier_margin = elSize*6/17;
-                        percent_margin = 35.2;
-                        percent_width = 29.4;
-                        console.log("else_460:"+elSize);
-                    };
+                    dot_sldier_margin = (elSize-130)/2;
+                    percent_margin = (130*dot_sldier_margin)/elSize;
+                    percent_width = (130*100)/elSize;
                     console.log("div:"+elSize);
-                    $slide.after('<div style="width:'+(percent_width)+'%; margin-left:'+(percent_margin)+'%; overflow:hidden"><ul class="lSPager ' + cl + '"></ul></div>');
-                    console.log("418_elsize"+ ":" + elSize);
+                    // $slide.after('<div style="width:'+(170)+'px; margin-left:'+(percent_margin)+'%; overflow:hidden"><ul class="lSPager ' + cl + '"></ul></div>');
+                    $slide.after('<div class="pager_new" style="width:'+(130)+'px; overflow:hidden"><ul class="lSPager ' + cl + '" style="margin:auto"></ul></div>');
+                    // console.log("418_elsize"+ ":" + elSize);
                     var gMargin = (settings.vertical) ? 'margin-left' : 'margin-top';
                     $slide.parent().find('.lSPager').css(gMargin, settings.galleryMargin + 'px');
                     refresh.createPager();
+                    console.log('refresh createPage')
                 }
 
                 setTimeout(function () {
@@ -564,21 +546,9 @@
                         ob.eq(sc).fadeIn(settings.speed);
                     }
                     // console.log(sc);
+                    if (ob.length > 7 ) {
                     for (var i=0 ;i <= (ob.length-1); i++)
                     {
-                    //     if (i == sc) {
-                    //         // ob.eq(i).removeClass("inactive");
-                    //         ob.eq(i).removeClass("dot_medium");
-                    //         ob.eq(i).removeClass("dot_small");
-                    //         ob.eq(sc).addClass('active');
-                    //         ob.eq(sc).addClass('focus');
-                    //     }
-                    //    if (i == (sc +1) ) {
-                    //     ob.eq(sc).addClass('active');
-                    //     ob.eq(sc).addClass('focus');
-
-                    //     }
-
                     ob.eq(i).removeClass("dot_medium");
                     ob.eq(i).removeClass("dot_small_1");
                     ob.eq(i).removeClass("dot_small_2");
@@ -607,7 +577,17 @@
                     ob.eq(sc-5).addClass('inactive');
                     ob.eq(sc+5).addClass('inactive');
                     ob.eq(sc+6).addClass('inactive');
-                    ob.eq(sc-6).addClass('inactive');
+                    ob.eq(sc-6).addClass('inactive'); 
+                    }
+                    else {
+                       
+                        ob.eq(sc).addClass('focus');
+                        ob.eq(sc).addClass('active');
+                        ob.eq(sc+1).removeClass('focus');
+                        ob.eq(sc-1).removeClass('focus');
+                        ob.eq(sc+1).removeClass('active');
+                        ob.eq(sc-1).removeClass('active');
+                    }
                 } else {
                     ob.removeClass('active');
                     // ob.removeClass('active_color');

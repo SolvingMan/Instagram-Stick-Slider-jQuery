@@ -82,6 +82,8 @@
             pagerWidth = 0,
             slideWidth = 0,
             thumbWidth = 0,
+            slidereffect = 0,
+            slideflag = false,
             interval = null,
             isTouch = ('ontouchstart' in document.documentElement);
         var refresh = {};
@@ -185,7 +187,20 @@
             },
             controls: function () {
                 if (settings.controls) {
-                    $el.after('<div class="lSAction"><a class="lSPrev">' + settings.prevHtml + '</a><a class="lSNext">' + settings.nextHtml + '</a></div>');
+                    if ($(window).width() > 981) {  $el.after('<div class="lSAction"><a class="lSPrev" ><i class="fas fa-chevron-left" style="font-size:30px; color:black"></i>' + settings.prevHtml + '</a><a class="lSNext">' + settings.nextHtml + '<i class="fas fa-chevron-right" style="font-size:30px; color:black"></i></a></div>');}		
+	                    $(window).resize(function() {         		
+	                    if ($(window).width() > 981) {		
+	                        var existed = $('.lSAction').length;		
+	                        if(existed == 0)		
+	                        {		
+	                            $el.after('<div class="lSAction"><a class="lSPrev" ><i class="fas fa-chevron-left" style="font-size:30px; color:black"></i>' + settings.prevHtml + '</a><a class="lSNext">' + settings.nextHtml + '<i class="fas fa-chevron-right" style="font-size:30px; color:black"></i></a></div>');		
+	                        }		
+	                    }		
+	                    else{		
+	                        $('.lSAction').remove(); 		
+	                    }		
+	                    });		
+	                  
                     if (!settings.autoWidth) {
                         if (length <= settings.item) {
                             $slide.find('.lSAction').hide();
@@ -345,8 +360,13 @@
                 var $this = this;
                 console.log("refresh start");
                 refresh.createPager = function () {
-                    console.log("347:"+elSize);
-                    elSize=130;
+                    console.log("asdfsadfasd"+$(window).height());
+                    if ($(window).height() < 1200 ) {
+                        elSize=110;
+                    }
+                   else {
+                    elSize=180;
+                   }
                     thumbWidth = (elSize - ((settings.thumbItem * (settings.thumbMargin)) - settings.thumbMargin)) / settings.thumbItem;
                     console.log("349:"+thumbWidth);
                     // console.log("343:"+elSize);
@@ -366,9 +386,11 @@
                             }
                         }
                         var thumb = $children.eq(i * settings.slideMove).attr('data-thumb');
-
+                        // console.log($(window).height())
+                        // var per=0.8;
+                        // if ($(window).height() > 1200 ) { per = 1. } 
                         if (settings.gallery === true) {
-                            pagers += '<li style="width:100%;' + property + ':' + thumbWidth + 'px;' + gutter + ':' + settings.thumbMargin + 'px"><i class=" fas fa-circle dot_sliders" style="font-size:'+thumbWidth+'px;color:#e6e6e6"></i></li>';
+                            pagers += '<li style="width:100%;' + property + ':' + thumbWidth + 'px;' + gutter + ':' + settings.thumbMargin + 'px"><i class=" fas fa-circle dot_sliders" style="font-size:'+(thumbWidth*0.8)+'px;color:#e6e6e6"></i></li>';
                             // console.log("364_gutter"+ ":"+ gutter);
                             console.log("property"+property+":"+thumbWidth);
                         } else {
@@ -432,16 +454,16 @@
                     if (settings.gallery) {
                         cl = 'lSGallery';
                     }
-                    var dot_sldier_margin;
-                    var dot_sldier_width;
-                    var percent_margin;
-                    var percent_width;
-                    dot_sldier_margin = (elSize-130)/2;
-                    percent_margin = (130*dot_sldier_margin)/elSize;
-                    percent_width = (130*100)/elSize;
-                    console.log("div:"+elSize);
+                    console.log("asdfsadfasd"+$(window).height());
+                    console.log($(window).height() );
+                    if ($(window).height() < 1200 ) {
+                        elSize=110;
+                    }
+                   else {
+                    elSize=180;
+                   }
                     // $slide.after('<div style="width:'+(170)+'px; margin-left:'+(percent_margin)+'%; overflow:hidden"><ul class="lSPager ' + cl + '"></ul></div>');
-                    $slide.after('<div class="pager_new" style="width:'+(130)+'px; overflow:hidden"><ul class="lSPager ' + cl + '"></ul></div>');
+                    $slide.after('<div class="pager_new" style="width:'+(elSize)+'px; overflow:hidden;margin-top:-50px;"><ul class="lSPager ' + cl + '" style="margin:auto"></ul></div>');
                     // console.log("418_elsize"+ ":" + elSize);
                     var gMargin = (settings.vertical) ? 'margin-left' : 'margin-top';
                     $slide.parent().find('.lSPager').css(gMargin, settings.galleryMargin + 'px');
@@ -545,50 +567,53 @@
                         ob.eq(sc).fadeIn(settings.speed);
                     }
                     // console.log(sc);
-                    for (var i=0 ;i <= (ob.length-1); i++)
-                    {
-                    //     if (i == sc) {
-                    //         // ob.eq(i).removeClass("inactive");
-                    //         ob.eq(i).removeClass("dot_medium");
-                    //         ob.eq(i).removeClass("dot_small");
-                    //         ob.eq(sc).addClass('active');
-                    //         ob.eq(sc).addClass('focus');
-                    //     }
-                    //    if (i == (sc +1) ) {
-                    //     ob.eq(sc).addClass('active');
-                    //     ob.eq(sc).addClass('focus');
-
-                    //     }
-
-                    ob.eq(i).removeClass("dot_medium");
-                    ob.eq(i).removeClass("dot_small_1");
-                    ob.eq(i).removeClass("dot_small_2");
-                    ob.eq(i).removeClass("dot_small_3");
-                    ob.eq(i).removeClass("active");
-                    ob.eq(i).removeClass("focus");
-                    ob.eq(i).removeClass("inactive");
+                    if (ob.length < 6) {
+                        for  (var i=0 ;i <= (ob.length-1); i++) {
+                            ob.eq(i).removeClass("active focus")
+                        }
+                        ob.eq(sc).addClass('active');
+                        ob.eq(sc).addClass('focus');
+                    } else {
+												for (var i=0 ;i <= (ob.length-1); i++)
+												{
+													ob.eq(i).removeClass('dot_medium dot_small_1 dot_small_2 dot_small_3 active focus inactive');
+													// ob.eq(i).removeClass("dot_small_1");
+													// ob.eq(i).removeClass("dot_small_2");
+													// ob.eq(i).removeClass("dot_small_3");
+													// ob.eq(i).removeClass("active");
+													// ob.eq(i).removeClass("focus");
+													// ob.eq(i).removeClass("inactive");
+												}
+											if (sc > 0 ) {
+													var len = ob.length; 
+													ob.eq(sc).addClass('active focus');
+													if ( sc+1 <= len ) ob.eq(sc+1).addClass('dot_medium');
+													if ( sc-1 >= 0 ) 	 ob.eq(sc-1).addClass('dot_medium');
+													if ( sc+2 <= len ) ob.eq(sc+2).addClass('dot_small_1');
+													if ( sc-2 >= 0 ) 	 ob.eq(sc-2).addClass('dot_small_1');
+													if ( sc-3 >= 0 )	 ob.eq(sc-3).addClass('dot_small_2');
+													if ( sc+3 <= len ) ob.eq(sc+3).addClass('dot_small_2');
+													if ( sc-4 >= 0 )	 ob.eq(sc-4).addClass('dot_small_3');
+													if ( sc+4 <= len ) ob.eq(sc+4).addClass('dot_small_3');
+													if ( sc+5 <= len ) ob.eq(sc+5).removeClass('dot_small_2');
+													if ( sc-5 >= 0 )		ob.eq(sc-5).addClass('inactive');
+													if ( sc+5 <= len )	ob.eq(sc+5).addClass('inactive');
+													if ( sc+6 <= len )	ob.eq(sc+6).addClass('inactive');
+													if ( sc-6 >= 0 )		ob.eq(sc-6).addClass('inactive');
+											}
+											else {
+													ob.eq(sc).addClass('active');
+													ob.eq(sc).addClass('focus');
+													ob.eq(sc+1).addClass('dot_medium');
+													ob.eq(sc+2).addClass('dot_small_1');
+													ob.eq(sc+3).addClass('dot_small_2');
+													// ob.eq(sc+4).addClass('dot_small_3');
+													// ob.eq(sc+5).addClass('inactive');
+													// ob.eq(sc+6).addClass('inactive');
+													
+											}
                     }
-
-                    // console.log(ob.length);
-                    // ob.eq(sc+4).removeClass("inactive");
-                    // ob.eq(sc-4).removeClass("inactive");
-                    // ob.eq(sc-1).removeClass('focus');
-                    // ob.eq(sc+1).removeClass('focus');
-                    ob.eq(sc).addClass('active');
-                    ob.eq(sc).addClass('focus');
-                    ob.eq(sc+1).addClass('dot_medium');
-                    ob.eq(sc-1).addClass('dot_medium');
-                    ob.eq(sc+2).addClass('dot_small_1');
-                    ob.eq(sc-2).addClass('dot_small_1');
-                    ob.eq(sc-3).addClass('dot_small_2');
-                    ob.eq(sc+3).addClass('dot_small_2');
-                    ob.eq(sc-4).addClass('dot_small_3');
-                    ob.eq(sc+4).addClass('dot_small_3');
-                    ob.eq(sc+5).removeClass('dot_small_2');
-                    ob.eq(sc-5).addClass('inactive');
-                    ob.eq(sc+5).addClass('inactive');
-                    ob.eq(sc+6).addClass('inactive');
-                    ob.eq(sc-6).addClass('inactive');
+                    
                 } else {
                     ob.removeClass('active');
                     // ob.removeClass('active_color');
@@ -601,6 +626,7 @@
                 // console.log("537_active");
             },
             move: function (ob, v) {
+                console.log(slideflag)
                 if (settings.rtl === true) {
                     v = -v;
                 }
@@ -611,10 +637,13 @@
                             '-webkit-transform': 'translate3d(0px, ' + (-v) + 'px, 0px)'
                         });
                     } else {
-                        ob.css({
-                            'transform': 'translate3d(' + (-v) + 'px, 0px, 0px)',
-                            '-webkit-transform': 'translate3d(' + (-v) + 'px, 0px, 0px)',
-                        });
+                        if ( slideflag === false ) {
+                            ob.css({
+                                'transform': 'translate3d(' + (-v) + 'px, 0px, 0px)',
+                                 '-webkit-transform': 'translate3d(' + (-v) + 'px, 0px, 0px)',
+                             });
+                        }
+                       
                     }
                 } else {
                     if (settings.vertical === true) {
@@ -690,8 +719,6 @@
             },
             slideThumb: function () {
                 var position;
-                // console.log("633_currentPagerPosition:"+settings.currentPagerPosition);
-                // console.log("634_page"+scene);
                 switch (settings.currentPagerPosition) {
                 case 'left':
                     position = 0;
@@ -754,6 +781,7 @@
                 if (settings.mode === 'slide') {
                     var distance = endCoords - startCoords;
                     var swipeVal = slideValue - distance;
+                    // console.log(slideValue)
                     if ((swipeVal) >= w - elSize - settings.slideMargin) {
                         if (settings.freeMove === false) {
                             swipeVal = w - elSize - settings.slideMargin;
@@ -769,6 +797,12 @@
                             swipeVal = swipeVal / 5;
                         }
                     }
+                    // if (swipeVal < )
+                    var touch_slider_width=$('#image-gallery').width();
+                    var items= $slide.find('.lslide').length;
+                    // console.log((touch_slider_width/items)*(items-1));
+                    slidereffect =  (touch_slider_width/items)*(items-1) ;
+                    if ( swipeVal > slidereffect ) { slideflag = true } else { slideflag = false }
                     this.move($el, swipeVal);
                 }
             },

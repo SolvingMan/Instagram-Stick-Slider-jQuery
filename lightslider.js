@@ -295,7 +295,6 @@
                             scene = $el.find('.clone.left').length;
                         }
                     }
-                    if (settings.rtl === true && settings.vertical === false ) { gutter = 'margin-top'}
                 };
                 refresh.calL = function () {
                     $children = $el.children();

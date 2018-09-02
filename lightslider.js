@@ -431,12 +431,10 @@
                     if (settings.gallery) {
                         cl = 'lSGallery';
                     }
-                    var dot_sldier_margin;
-                    var dot_sldier_width;
                     var percent_margin;
                     var percent_width;
                     // console.log("elSize"+(elSize*2)/5);
-                    if ( window.screen.availWidth >= 1900) {
+                    if ( window.screen.availWidth >= 1800) {
                          dot_sldier_width = elSize/4;
                          dot_sldier_margin = elSize*3/8;
                          percent_width = 25;

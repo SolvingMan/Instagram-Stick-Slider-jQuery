@@ -295,6 +295,7 @@
                             scene = $el.find('.clone.left').length;
                         }
                     }
+                    if (settings.rtl === true && settings.vertical === false ) { gutter = 'margin-top'}
                 };
                 refresh.calL = function () {
                     $children = $el.children();
@@ -325,10 +326,8 @@
                 }
                 if (settings.loop === true && settings.mode === 'slide') {
                     $children.eq(scene).addClass('active');
-                    // console.log("335_scene:"+JSON.stringify($children));
                 } else {
                     $children.first().addClass('active');
-                    // console.log("337_scene:"+JSON.stringify($children));
                 }
             },
             pager: function () {
@@ -433,7 +432,6 @@
                     }
                     var percent_margin;
                     var percent_width;
-                    // console.log("elSize"+(elSize*2)/5);
                     if ( window.screen.availWidth >= 1800) {
                          dot_sldier_width = elSize/4;
                          dot_sldier_margin = elSize*3/8;

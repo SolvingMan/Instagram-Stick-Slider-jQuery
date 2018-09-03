@@ -879,6 +879,28 @@
                             $this.touchMove(endCoords, startCoords);
                         }
                     });
+                    if (on === false) {
+                        if (settings.mode === 'slide') {
+                            if (plugin.doCss()) {
+                                $el.addClass('lSSlide');
+                                if (settings.speed !== '') {
+                                    $slide.css('transition-duration', settings.speed + 'ms');
+                                }
+                                if (settings.cssEasing !== '') {
+                                    $slide.css('transition-timing-function', settings.cssEasing);
+                                }
+                            }
+                        } else {
+                            if (plugin.doCss()) {
+                                if (settings.speed !== '') {
+                                    $el.css('transition-duration', settings.speed + 'ms');
+                                }
+                                if (settings.cssEasing !== '') {
+                                    $el.css('transition-timing-function', settings.cssEasing);
+                                }
+                            }
+                        }
+                    }
                     $(window).on('mouseup', function (e) {
                         if (isDraging) {
                             $slide.find('.lightSlider').removeClass('lsGrabbing').addClass('lsGrab');

@@ -1155,6 +1155,23 @@
                     }
                 }
             }
+            if (this.doCss()) {
+
+                if (settings.enableTouch === true) {
+                    $this.enableTouch();
+                }
+                if (settings.enableDrag === true) {
+                    $this.enableDrag();
+                }
+            }
+
+            $(window).on('focus', function(){
+                $this.auto();
+            });
+            
+            $(window).on('blur', function(){
+                clearInterval(interval);
+            });
             if (!_touch) {
                 settings.onBeforeSlide.call(this, $el, scene);
             }

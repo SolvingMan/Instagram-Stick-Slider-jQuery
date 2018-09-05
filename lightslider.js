@@ -534,35 +534,17 @@
                         ob.eq(sc).fadeIn(settings.speed);
                     }
                     // console.log(sc);
+                   
                     for (var i=0 ;i <= (ob.length-1); i++)
                     {
-                    //     if (i == sc) {
-                    //         // ob.eq(i).removeClass("inactive");
-                    //         ob.eq(i).removeClass("dot_medium");
-                    //         ob.eq(i).removeClass("dot_small");
-                    //         ob.eq(sc).addClass('active');
-                    //         ob.eq(sc).addClass('focus');
-                    //     }
-                    //    if (i == (sc +1) ) {
-                    //     ob.eq(sc).addClass('active');
-                    //     ob.eq(sc).addClass('focus');
-
-                    //     }
-
-                    ob.eq(i).removeClass("dot_medium");
-                    ob.eq(i).removeClass("dot_small_1");
-                    ob.eq(i).removeClass("dot_small_2");
-                    ob.eq(i).removeClass("dot_small_3");
-                    ob.eq(i).removeClass("active");
-                    ob.eq(i).removeClass("focus");
-                    ob.eq(i).removeClass("inactive");
+                    ob.eq(i).removeClass("dot_medium dot_small_1 dot_small_2 dot_small_3 active focus inactive");
                     }
+                    if( ob.length < 6 ) { 
+                        ob.eq(sc).addClass('active focus');
+                        ob.eq(sc+1).removeClass('active focus');
+                        ob.eq(sc+1).removeClass('active focus');
 
-                    // console.log(ob.length);
-                    // ob.eq(sc+4).removeClass("inactive");
-                    // ob.eq(sc-4).removeClass("inactive");
-                    // ob.eq(sc-1).removeClass('focus');
-                    // ob.eq(sc+1).removeClass('focus');
+                    }else {} 
                     ob.eq(sc).addClass('active');
                     ob.eq(sc).addClass('focus');
                     ob.eq(sc+1).addClass('dot_medium');

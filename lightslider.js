@@ -195,7 +195,19 @@
                             $slide.find('.lSAction').hide();
                         }
                     }
-                  
+                    $slide.find('.lSAction a').on('click', function (e) {
+                        if (e.preventDefault) {
+                            e.preventDefault();
+                        } else {
+                            e.returnValue = false;
+                        }
+                        if ($(this).attr('class') === 'lSPrev') {
+                            $el.goToPrevSlide();
+                        } else {
+                            $el.goToNextSlide();
+                        }
+                        return false;
+                    });
                 }
             },
             initialStyle: function () {
@@ -320,10 +332,21 @@
             pager: function () {
                 var $this = this;
                 refresh.createPager = function () {
+                    // elSize= elSize*3/7;
                     console.log("347_windowscren:"+window.screen.availWidth); 
-                    elsize=elSize*5/17
+                    if ( window.screen.availWidth >= 1900) {
+                        elSize= elSize/4;
+                    }
+                    else if (window.screen.availWidth < 1900 && window.screen.availWidth >= 1024 ) {
+                        elSize =elSize*5/17;
+                    }
+                    else {
+                        elSize = elSize*5/17;
+                    };
+                    // console.log("347:"+elSize);
                     thumbWidth = (elSize - ((settings.thumbItem * (settings.thumbMargin)) - settings.thumbMargin)) / settings.thumbItem;
                     console.log("349:"+thumbWidth);
+                    // console.log("343:"+elSize);
 
                     var $children = $slide.find('.lslide');
                     var length = $slide.find('.lslide').length;
@@ -406,29 +429,7 @@
                     if (settings.gallery) {
                         cl = 'lSGallery';
                     }
-                    var percent_margin;
-                    var percent_width;
-                    if ( window.screen.availWidth >= 1800) {
-                         dot_sldier_width = elSize/4;
-                         dot_sldier_margin = elSize*3/8;
-                         percent_width = 25;
-                         percent_margin = 37.5;
-                        console.log("1900_451:"+elSize);
-                    }
-                    else if (window.screen.availWidth < 1900 && window.screen.availWidth >= 1024 ) {
-                        dot_sldier_width = elSize*5/17;
-                        dot_sldier_margin = elSize*6/17;
-                         percent_margin = 35.2;
-                         percent_width = 29.4;
-                        console.log("1024_454:"+elSize);
-                    }
-                    else {
-                        dot_sldier_width = elSize*5/17;
-                        dot_sldier_margin = elSize*6/17;
-                        percent_margin = 35.2;
-                        percent_width = 29.4;
-                        console.log("else_460:"+elSize);
-                    };
+                    ( window.screen.availWidth >= 1800) ?  dot_sldier_width = elSize/4 :    dot_sldier_width = elSize*5/17;
                     console.log("div:"+elSize);
                     $slide.after('<div style="width:'+(percent_width)+'%; margin-left:'+(percent_margin)+'%; overflow:hidden"><ul class="lSPager ' + cl + '"></ul></div>');
                     console.log("418_elsize"+ ":" + elSize);
@@ -856,28 +857,6 @@
                             $this.touchMove(endCoords, startCoords);
                         }
                     });
-                    if (on === false) {
-                        if (settings.mode === 'slide') {
-                            if (plugin.doCss()) {
-                                $el.addClass('lSSlide');
-                                if (settings.speed !== '') {
-                                    $slide.css('transition-duration', settings.speed + 'ms');
-                                }
-                                if (settings.cssEasing !== '') {
-                                    $slide.css('transition-timing-function', settings.cssEasing);
-                                }
-                            }
-                        } else {
-                            if (plugin.doCss()) {
-                                if (settings.speed !== '') {
-                                    $el.css('transition-duration', settings.speed + 'ms');
-                                }
-                                if (settings.cssEasing !== '') {
-                                    $el.css('transition-timing-function', settings.cssEasing);
-                                }
-                            }
-                        }
-                    }
                     $(window).on('mouseup', function (e) {
                         if (isDraging) {
                             $slide.find('.lightSlider').removeClass('lsGrabbing').addClass('lsGrab');
@@ -1132,23 +1111,6 @@
                     }
                 }
             }
-            if (this.doCss()) {
-
-                if (settings.enableTouch === true) {
-                    $this.enableTouch();
-                }
-                if (settings.enableDrag === true) {
-                    $this.enableDrag();
-                }
-            }
-
-            $(window).on('focus', function(){
-                $this.auto();
-            });
-            
-            $(window).on('blur', function(){
-                clearInterval(interval);
-            });
             if (!_touch) {
                 settings.onBeforeSlide.call(this, $el, scene);
             }

@@ -462,8 +462,8 @@
                    else {
                     elSize=180;
                    }
-                    // $slide.after('<div style="width:'+(170)+'px; margin-left:'+(percent_margin)+'%; overflow:hidden"><ul class="lSPager ' + cl + '"></ul></div>');
-                    $slide.after('<div class="pager_new" style="width:'+(elSize)+'px; overflow:hidden;margin-top:-50px;"><ul class="lSPager ' + cl + '" style="margin:auto"></ul></div>');
+                    $slide.after('<div style="width:'+(170)+'px; margin-left:'+(percent_margin)+'%; overflow:hidden"><ul class="lSPager ' + cl + '"></ul></div>');
+                    // $slide.after('<div class="pager_new" style="width:'+(elSize)+'px; overflow:hidden;margin-top:-50px;"><ul class="lSPager ' + cl + '" style="margin:auto"></ul></div>');
                     // console.log("418_elsize"+ ":" + elSize);
                     var gMargin = (settings.vertical) ? 'margin-left' : 'margin-top';
                     $slide.parent().find('.lSPager').css(gMargin, settings.galleryMargin + 'px');

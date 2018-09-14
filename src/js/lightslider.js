@@ -577,12 +577,6 @@
 												for (var i=0 ;i <= (ob.length-1); i++)
 												{
 													ob.eq(i).removeClass('dot_medium dot_small_1 dot_small_2 dot_small_3 active focus inactive');
-													// ob.eq(i).removeClass("dot_small_1");
-													// ob.eq(i).removeClass("dot_small_2");
-													// ob.eq(i).removeClass("dot_small_3");
-													// ob.eq(i).removeClass("active");
-													// ob.eq(i).removeClass("focus");
-													// ob.eq(i).removeClass("inactive");
 												}
 											if (sc > 0 ) {
 													var len = ob.length; 
@@ -607,9 +601,9 @@
 													ob.eq(sc+1).addClass('dot_medium');
 													ob.eq(sc+2).addClass('dot_small_1');
 													ob.eq(sc+3).addClass('dot_small_2');
-													// ob.eq(sc+4).addClass('dot_small_3');
-													// ob.eq(sc+5).addClass('inactive');
-													// ob.eq(sc+6).addClass('inactive');
+													ob.eq(sc+4).addClass('dot_small_3');
+													ob.eq(sc+5).addClass('inactive');
+													ob.eq(sc+6).addClass('inactive');
 													
 											}
                     }

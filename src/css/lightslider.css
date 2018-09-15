@@ -83,14 +83,15 @@
     padding: 0 5px;
 }
 .lSSlideOuter .lSPager.lSpg > li a {
-    text-indent: -999em;
-    width: 8px;
-    position: relative;
-    z-index: 99;
+    /* background-color: #222222;
     border-radius: 30px;
     display: inline-block;
     height: 8px;
     overflow: hidden;
+    text-indent: -999em;
+    width: 8px;
+    position: relative;
+    z-index: 99; */
     -webkit-transition: all 0.5s linear 0s;
     transition: all 0.5s linear 0s;
 }
@@ -154,6 +155,23 @@
 .lSSlideOuter .lSPager.lSGallery li.dot_small_3 .dot_sliders{
     transform: scale(.2);
 }
+.lSSlideOuter .lSPager.lSGallery li.active, li.focus .dot_sliders{
+    color:#0e0e0e !important;
+    /* opacity: 0.8; */
+    /* transform: scale(.9); */
+    /* font-weight: 900 !important; */
+}
+/* .lSSlideOuter .lSPager.lSGallery li.small_size .dot_sliders{
+    /* color:#0e0e0e !important; */
+    /* opacity: 0.8; */
+    /* transform: scale(.8); */
+    /* font-weight: 900 !important; */
+/* } */ 
+
+
+/* ############################################ */
+
+
 
 .lSSlideOuter .lSPager.lSGallery img {
     display: block;

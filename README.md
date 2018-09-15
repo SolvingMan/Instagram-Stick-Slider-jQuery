@@ -3,7 +3,7 @@
 ![bower](https://img.shields.io/bower/v/lightslider.svg)
 ![npm](https://img.shields.io/npm/v/lightslider.svg)
 
-jQuery lightSlider
+Instagram-Stick-slider-jQuery
 =============
 
 

@@ -4,11 +4,11 @@
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 Description
----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
 a lightWeight responsive content slider with stick
 
 Main Features
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
   Fully responsive - will adapt to any device.
   Separate settings per breakpoint.
   Gallery mode to create an image slideshow with thumbnails
@@ -24,11 +24,11 @@ Main Features
 The Code 
   add the following code to the <head> of your code.
   
-  <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="js/lightslider.js"></script>
-  // Do not include both lightslider.js and lightslider.min.js
-  
+      <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="js/lightslider.js"></script>
+      // Do not include both lightslider.js and lightslider.min.js
+
   Slider Settings
   
   <script type="text/javascript">
@@ -90,16 +90,16 @@ The Code
 
 Public methods
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        var slider = $("#light-slider").lightSlider();
-        slider.goToSlide(3);
-        slider.goToPrevSlide();
-        slider.goToNextSlide();
-        slider.getCurrentSlideCount();
-        slider.refresh();
-        slider.play();
-        slider.pause();
-        slider.destroy();
-    });
-</script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var slider = $("#light-slider").lightSlider();
+            slider.goToSlide(3);
+            slider.goToPrevSlide();
+            slider.goToNextSlide();
+            slider.getCurrentSlideCount();
+            slider.refresh();
+            slider.play();
+            slider.pause();
+            slider.destroy();
+        });
+    </script>

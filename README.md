@@ -10,15 +10,25 @@ a lightWeight responsive content slider with stick
 Main Features
 ---------------------------------------------------------------------------------------------------------------------------------------
   Fully responsive - will adapt to any device.
+  
   Separate settings per breakpoint.
+  
   Gallery mode to create an image slideshow with thumbnails
+  
   Supports swipe and mouseDrag
+  
   Add or remove slides dynamically.
+  
   Small file size, fully themed, simple to implement.
+  
   CSS transitions with jQuery fallback.
+  
   Full callback API and public methods.
+  
   Auto play and infinite loop to create a content carousel.
-  Keyboard, arrows and dots navigation.
+  
+  Keyboard, arrows and dots navigation. 
+  
   Chrome, Safari, Firefox, Opera, IE7+, IOS, Android, windows phone.
   
 The Code 
